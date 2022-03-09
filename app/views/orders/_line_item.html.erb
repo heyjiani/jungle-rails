@@ -1,7 +1,15 @@
-<div>
-  <%= image_tag product.image.thumb, alt: product.name %>
-  <h4><%= product.name %></h4>
-  <p><%= product.description %></p>
-  <p><%= quantity %></p>
-  <p><%= humanized_money_with_symbol totals / 100.0 %></p>
-</div>
+<tr>
+  <td>
+  <%= image_tag product.image.tiny, alt: product.name %>
+  </td>
+  <td>
+    <h4><%= product.name %></h4>
+    <p><%= product.description %></p>
+  </td>
+  <td>
+    <%= quantity %>
+  </td>
+  <td>
+    <%= humanized_money_with_symbol totals / 100.0 %>
+  </td>
+</tr>

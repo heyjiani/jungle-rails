@@ -5,10 +5,34 @@
   </header>
 
   <div class="order-summary jumbotron">
-    <h4>Thank you for your order!</h4>
-    <% @line_items.each do |item| %>
-      <%= render 'line_item', product: item.product, quantity: item.quantity, totals: item.total_price_cents %>
-    <% end %>
+    <h2>Thank you for your order!</h4>
+    <p class="lead">A receipt of your order has been sent to <%= @order.email %>.</p>
+
+    <br>
+    <h3>Order Summary:</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th colspan="2">Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @line_items.each do |item| %>
+          <%= render 'line_item', product: item.product, quantity: item.quantity, totals: item.total_price_cents %>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr class="table-info">
+          <th colspan="2"></th>
+          <th>TOTAL: </th>
+          <th>
+            <%= humanized_money_with_symbol @order.total_cents / 100.0 %>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
   </div>
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
