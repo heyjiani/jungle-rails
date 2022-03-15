@@ -2,17 +2,17 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  describe 'Validations' do
-    before(:each) do
-      @user = User.new(
-        first_name: 'Billy',
-        last_name: 'Zane',
-        email: 'test@test.com',
-        password: 'password',
-        password_confirmation: 'password'
-      )
-    end
+  before(:each) do
+    @user = User.new(
+      first_name: 'Billy',
+      last_name: 'Zane',
+      email: 'test@test.com',
+      password: 'password',
+      password_confirmation: 'password'
+    )
+  end
 
+  describe 'Validations' do
     it "successfully creates a user when all fields are filled and validated" do
       @user.save
       
@@ -99,8 +99,46 @@ RSpec.describe User, type: :model do
         expect(test_errors).to include "Email has already been taken"
       end
     end
+  end
 
+  describe '.authenticate_with_credentials' do
 
+    context "logging in with the right email and password" do
+      it "lets the user log in" do
+        @user.save
+        login = User.authenticate_with_credentials('test@test.com', 'password')
+  
+        expect(login).to eq(@user)
+      end
+
+      it "lets the user log in when email contains whitespace" do
+        @user.save
+        login = User.authenticate_with_credentials(' test@test.com ', @user.password)
+  
+        expect(login).to eq(@user)
+      end
+
+      it "lets the user log in if they accidentally capitalize any character in email" do
+        @user.save
+        login = User.authenticate_with_credentials('TEsT@tEST.COM', @user.password)
+  
+        expect(login).to eq(@user)
+      end
+    end
+
+    it "does not let user log in with the wrong password" do
+      @user.save
+      login = User.authenticate_with_credentials(@user.email, 'abc')
+
+      expect(login).to eq(nil)
+    end
+
+    it "does not let user log in with the wrong email" do
+      @user.save
+      login = User.authenticate_with_credentials('abc@abc.com', @user.password)
+
+      expect(login).to eq(nil)
+    end
   end
 
 end
