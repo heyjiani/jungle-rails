@@ -7,6 +7,17 @@
   <div class="col-sm-5">
     <%= form_for :user, url: '/users' do |f| %>
 
+    <% if params[:user_errors] %>
+      <div class="alert alert-danger">
+        <strong>The following errors prevented saving:</strong>
+          <ul>
+            <% params[:user_errors].each do |err| %>
+              <li><%= err %></li>
+            <% end %>
+          </ul>
+      </div>
+    <% end %>
+
       <div class="form-group">
         <%= f.label :first_name %>
         <%= f.text_field :first_name, class: 'form-control' %>
