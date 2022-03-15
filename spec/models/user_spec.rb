@@ -64,6 +64,15 @@ RSpec.describe User, type: :model do
 
         expect(test_errors).to include "Password confirmation can't be blank"
       end
+
+      it "throws an error when password is shorter than 6 characters" do
+        @user.password = 'test'
+        @user.password_confirmation = 'test'
+        @user.save
+        test_errors = @user.errors.full_messages
+
+        expect(test_errors).to include "Password is too short (minimum is 6 characters)"
+      end
     end
 
     context 'given invalid email' do
