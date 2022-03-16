@@ -21,9 +21,7 @@ RSpec.feature "AddToCarts", type: :feature, js: true do
         # ACT
         visit root_path
         expect(page).to have_content 'My Cart (0)'
-        within first('.product') do
-          click_button 'Add'
-        end
+        click_button('Add', match: :first)
     
         # DEBUG / VERIFY
         save_screenshot
