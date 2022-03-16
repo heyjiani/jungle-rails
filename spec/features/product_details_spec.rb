@@ -20,7 +20,7 @@ RSpec.feature "ProductDetails", type: :feature, js: true do
     scenario "They can navigate to the product detail page by clicking on a product" do
       # ACT
       visit root_path
-      first('.product a').click
+      first('.product header a').click
   
       # DEBUG / VERIFY
       save_screenshot
