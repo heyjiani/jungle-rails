@@ -6,10 +6,17 @@
 
 ## Screenshots
 
-[]()
-[]()
-[]()
+#### Homepage
+![Homepage](https://github.com/heyjiani/jungle-rails/blob/master/docs/Jungle_Homepage.png?raw=true)
 
+#### Users can add items to cart
+![Cart Page](https://github.com/heyjiani/jungle-rails/blob/master/docs/Jungle_Cart.png?raw=true)
+
+#### Users can place orders; transaction is handled by Stripe
+![Order Completed Page](https://github.com/heyjiani/jungle-rails/blob/master/docs/Jungle_Order.png?raw=true)
+
+#### Admin can add new products
+![Admin New Product Page](https://github.com/heyjiani/jungle-rails/blob/master/docs/Jungle_admin_addnew.png?raw=true)
 ## Additional Steps for Apple M1 Machines
 
 1. Make sure that you are runnning Ruby 2.6.6 (`ruby -v`)
